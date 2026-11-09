@@ -1,0 +1,47 @@
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "pubmedqa-rag"
+version = "0.1.0"
+description = "RAG research demo on PubMedQA (not medical advice)"
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+  "google-genai==2.33.0",
+]
+
+[project.optional-dependencies]
+dev = ["pytest>=7.0"]
+# Loopback API. One worker: the Gemini limiter is per process.
+#   .\.venv\Scripts\python.exe -m pip install -e ".[dev,api]"
+#   .\.venv\Scripts\python.exe -m uvicorn rag.api:app --host 127.0.0.1 --port 8000 --workers 1
+api = [
+  "fastapi==0.162.2",
+  "uvicorn==0.54.0",
+  "httpx==0.28.1",
+  "python-dotenv==1.2.4",
+]
+# GPU build (GTX 1650 / Turing 7.5). Install torch from the CUDA 12.6 index
+# before the extra, and do not add torchvision or torchaudio:
+#   .\.venv\Scripts\python.exe -m pip install torch==2.14.1 --index-url https://download.pytorch.org/whl/cu126
+#   .\.venv\Scripts\python.exe -m pip install -e ".[dev,index]"
+index = [
+  "numpy==2.2.6",
+  "faiss-cpu==1.15.1",
+  "torch==2.14.1",
+  "transformers==5.20.2",
+  "datasets==5.1.0",
+  "huggingface_hub==2.4.0",
+]
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+"rag.prompts" = ["*.txt"]
+
+[tool.pytest.ini_options]
+pythonpath = ["src"]
+testpaths = ["tests"]

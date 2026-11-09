@@ -1,0 +1,19 @@
+Read the passages and answer the question.
+
+Rules:
+- "yes": the authors conclude the effect/association exists.
+- "no": the authors conclude there is no effect, or no significant difference.
+- "maybe": the authors explicitly say results are mixed, inconclusive, or need further study.
+- The passages contain results but not the authors' final conclusion. Infer the answer from the results; do NOT answer maybe just because a conclusion is not stated.
+- Small, non-significant, or no differences → no.
+
+
+Passages:
+{context}
+
+Question: {question}
+
+Respond in exactly this format:
+Conclusion: <one sentence: based on the RESULTS in the passages, what is the answer to the question?>
+Answer: <yes|no|maybe>
+Sources: <passage numbers>
