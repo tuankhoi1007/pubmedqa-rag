@@ -23,6 +23,11 @@ api = [
   "httpx==0.28.1",
   "python-dotenv==1.2.4",
 ]
+# Local UI mounted on the same loopback app. One worker still applies.
+#   .\.venv\Scripts\python.exe -m pip install -e ".[dev,api,ui]"
+ui = [
+  "gradio==6.31.0",
+]
 # GPU build (GTX 1650 / Turing 7.5). Install torch from the CUDA 12.6 index
 # before the extra, and do not add torchvision or torchaudio:
 #   .\.venv\Scripts\python.exe -m pip install torch==2.14.1 --index-url https://download.pytorch.org/whl/cu126
