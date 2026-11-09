@@ -187,6 +187,21 @@ def test_debug_returns_raw_response_and_full_evidence():
     assert "prompt" not in body
 
 
+def test_out_of_scope_is_a_label_with_top1_score_and_no_sources():
+    payload = _payload(label="out_of_scope", sources=[])
+    payload["top1_score"] = 0.5
+    engine = FakeEngine(payload=payload)
+    with TestClient(_app(engine)) as client:
+        response = client.post("/ask", json={"question": QUESTION})
+    body = response.json()
+    assert response.status_code == 200
+    assert body["label"] == "out_of_scope"
+    assert body["sources"] == []
+    assert body["top1_score"] == 0.5
+    assert body["rate_limit_wait_seconds"] == 0.05
+    assert "raw_response" not in body
+
+
 def test_parse_fail_stays_a_label():
     engine = FakeEngine(payload=_payload(label="parse_fail", sources=[]))
     with TestClient(_app(engine)) as client:

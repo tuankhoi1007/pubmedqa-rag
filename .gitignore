@@ -14,4 +14,7 @@ results/*.jsonl
 dist/
 *.egg-info/
 artifacts/
-results/
+
+!results/scope/
+!results/scope/*.json
+!results/scope/README.md

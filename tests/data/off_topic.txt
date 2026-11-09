@@ -1,0 +1,50 @@
+Will it rain in Hanoi tomorrow?
+Is the temperature in Oslo below freezing tonight?
+Did the typhoon turn east yesterday?
+Is this summer hotter than last summer in Paris?
+Will there be snow in Tokyo next week?
+Is the humidity high enough for morning fog?
+Did lightning hit the airport during the storm?
+Is the wind above forty kilometers per hour?
+Does this Python function return None?
+Is this SQL query missing a WHERE clause?
+Can this Rust crate compile on Windows?
+Does git rebase rewrite commit hashes?
+Is this JSON document valid?
+Should this array loop start at zero?
+Does CSS grid replace flexbox for a page header?
+Is the unit test failing because the mock was not called?
+Did the home team win the football match?
+Is a marathon exactly 42.195 kilometers?
+Was the tennis serve in?
+Did the basketball game go to overtime?
+Is a player offside when level with the last defender?
+Did the swimmer finish in under one minute?
+Is chess included in the Olympic Games?
+Did the cyclist win the mountain stage?
+Should the pasta water be salted?
+Is the cake done when a toothpick comes out clean?
+Does this soup need another clove of garlic?
+Can butter replace oil in this cake?
+Should rice be rinsed before it is boiled?
+Does bread yeast need warm water?
+Is this curry supposed to simmer for an hour?
+Should the steak rest before it is sliced?
+asdf qwer zxcv 1234 ???
+blah blah blah blah blah
+!!!! #### $$$$ %%%% &&&&
+xyzzy plugh foo bar baz
+aaaaa bbbbb ccccc ddddd
+qqq www eee rrr ttt yyy
+yes/no question?
+Is the answer yes or no?
+Please answer yes or no.
+Yes or no?
+Hello
+Hi, how are you?
+Good morning
+Thanks, that was helpful
+Goodbye
+Hey there
+What time is the train to Da Nang?
+Is the stock market open on Saturday?

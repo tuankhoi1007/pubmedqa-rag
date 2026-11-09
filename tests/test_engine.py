@@ -57,7 +57,8 @@ def _engine(directory, top_k=2):
     return RAGEngine(RAGConfig(artifact_dir=directory, device="cpu", top_k=top_k))
 
 
-def test_config_stores_artifact_dir_device_and_default_top_k(tmp_path):
+def test_config_stores_artifact_dir_device_and_default_top_k(tmp_path, monkeypatch):
+    monkeypatch.delenv("RAG_MIN_SCORE", raising=False)
     config = RAGConfig(artifact_dir=tmp_path, device=" cuda ")
     engine = RAGEngine(config)
 
@@ -65,6 +66,7 @@ def test_config_stores_artifact_dir_device_and_default_top_k(tmp_path):
     assert engine.config.artifact_dir == tmp_path
     assert engine.config.device == "cuda"
     assert engine.config.top_k == 10
+    assert engine.config.min_score == 0.68
     assert engine.loaded is False
 
 
@@ -77,6 +79,21 @@ def test_config_rejects_bad_top_k_and_device(tmp_path):
         RAGConfig(artifact_dir=tmp_path, device="cpu", top_k=True)
     with pytest.raises(TypeError):
         RAGEngine({"artifact_dir": tmp_path})
+    with pytest.raises(ValueError):
+        RAGConfig(artifact_dir=tmp_path, device="cpu", min_score=True)
+    with pytest.raises(ValueError):
+        RAGConfig(artifact_dir=tmp_path, device="cpu", min_score=float("nan"))
+
+
+def test_min_score_reads_the_environment(tmp_path, monkeypatch):
+    monkeypatch.setenv("RAG_MIN_SCORE", "0.70")
+    from_env = RAGConfig(artifact_dir=tmp_path, device="cpu")
+    explicit = RAGConfig(artifact_dir=tmp_path, device="cpu", min_score=0.5)
+    assert from_env.min_score == 0.70
+    assert explicit.min_score == 0.5
+    monkeypatch.setenv("RAG_MIN_SCORE", "nope")
+    with pytest.raises(ValueError):
+        RAGConfig(artifact_dir=tmp_path, device="cpu")
 
 
 def test_retrieve_before_load_and_answer_are_explicit(tmp_path):

@@ -1,0 +1,60 @@
+# 10 | Did Chile's traffic law reform push police enforcement?
+After Chile rewrote its road-traffic statutes, did police enforce the rules more?
+# 18 | Is there a model to teach and practice retroperitoneoscopic nephrectomy?
+Does a training model exist for learning and rehearsing kidney removal through a retroperitoneal endoscope?
+# 24 | Are reports of mechanical dysfunction in chronic oro-facial pain related to somatisation?
+In long-lasting pain of the mouth and face, are complaints of mechanical dysfunction tied to somatization?
+# 25 | Amblyopia: is visual loss permanent?
+When a person has amblyopia, does the loss of vision last for good?
+# 35 | Do general practice characteristics influence uptake of an information technology (IT) innovation in primary care?
+Do the features of a general practice change how readily a primary-care clinic adopts a new information-technology tool?
+# 37 | Do follow-up recommendations for abnormal Papanicolaou smears influence patient adherence?
+If clinicians recommend follow-up after an abnormal Pap smear, does that change whether patients stick with the plan?
+# 55 | Is there a correlation between androgens and sexual desire in women?
+Among women, do androgen levels go together with the level of sexual desire?
+# 64 | Can we measure mesopic pupil size with the cobalt blue light slit-lamp biomicroscopy method?
+Is slit-lamp biomicroscopy with a cobalt-blue light a workable way to measure how large the pupil is in mesopic conditions?
+# 66 | Does a colonoscopy after acute diverticulitis affect its management?
+Once an episode of acute diverticulitis has happened, does performing a colonoscopy change how the illness is managed?
+# 72 | Is the combination with 2-methoxyestradiol able to reduce the dosages of chemotherapeutices in the treatment of human ovarian cancer?
+Can adding 2-methoxyestradiol allow lower chemotherapy doses in the treatment of ovarian cancer in humans?
+# 77 | Continuation of pregnancy after antenatal corticosteroid administration: opportunity for rescue?
+If the pregnancy continues after antenatal corticosteroids have been given, is there an opportunity for a rescue course?
+# 79 | Does the clinical presentation of a prior preterm birth predict risk in a subsequent pregnancy?
+Does the way an earlier preterm birth presented forecast the risk during the next pregnancy?
+# 84 | Treatment of contralateral hydrocele in neonatal testicular torsion: Is less more?
+For a hydrocele on the opposite side in neonatal testicular torsion, is a more limited treatment preferable?
+# 91 | Is Panton-Valentine leucocidin associated with the pathogenesis of Staphylococcus aureus bacteraemia in the UK?
+In bloodstream infections with Staphylococcus aureus in the UK, is Panton-Valentine leukocidin linked to how the illness develops?
+# 98 | Does the radiographic transition zone correlate with the level of aganglionosis on the specimen in Hirschsprung's disease?
+In Hirschsprung disease, does the transition zone on imaging match the level of aganglionosis found in the specimen?
+# 103 | Is there a favorable subset of patients with prostate cancer who develop oligometastases?
+Among patients with prostate cancer who go on to develop oligometastases, is there a subgroup with a more favorable course?
+# 107 | Department of Transportation vs self-reported data on motor vehicle collisions and driving convictions for stroke survivors: do they agree?
+For stroke survivors, do official transport records of crashes and driving convictions agree with what the patients themselves report?
+# 120 | Do patients with rheumatoid arthritis established on methotrexate and folic acid 5 mg daily need to continue folic acid supplements long term?
+Once patients with rheumatoid arthritis are stable on methotrexate plus 5 mg of folic acid each day, do they still need to keep taking folic acid over the long term?
+# 122 | Does lung ischemia and reperfusion have an impact on coronary flow?
+Do a period of ischemia in the lung and the later reperfusion change flow through the coronary circulation?
+# 124 | Transient tachypnea of the newborn (TTN): a role for polymorphisms in the beta-adrenergic receptor (ADRB) encoding genes?
+Might polymorphisms in the genes encoding the beta-adrenergic receptor play a role in transient tachypnea of the newborn?
+# 129 | Do somatic complaints predict subsequent symptoms of depression?
+Do complaints about bodily symptoms forecast depressive symptoms that appear later?
+# 130 | Are women with major depression in pregnancy identifiable in population health data?
+Can records from population health data pick out women who have major depression during pregnancy?
+# 136 | Can transcranial direct current stimulation be useful in differentiating unresponsive wakefulness syndrome from minimally conscious state patients?
+Is transcranial direct-current stimulation useful for separating patients with unresponsive wakefulness syndrome from those in a minimally conscious state?
+# 143 | Serovar specific immunity to Neisseria gonorrhoeae: does it exist?
+Does immunity to Neisseria gonorrhoeae that is specific to one serovar actually exist?
+# 149 | Can normal knee kinematics be restored with unicompartmental knee replacement?
+Can replacing a single compartment of the knee bring the joint's kinematics back to normal?
+# 154 | Would corrected QT dispersion predict left ventricular hypertrophy in hypertensive patients?
+In patients with hypertension, would corrected QT dispersion predict hypertrophy of the left ventricle?
+# 158 | Can bisphosphonate treatment be stopped in a growing child with skeletal fragility?
+For a child who is still growing and has a fragile skeleton, can treatment with a bisphosphonate be discontinued?
+# 175 | Are Biochemical Markers of Bone Turnover Representative of Bone Histomorphometry in 370 Postmenopausal Women?
+Among 370 postmenopausal women, are biochemical markers of bone turnover representative of what bone histomorphometry shows?
+# 185 | Chronic functional somatic symptoms: a single syndrome?
+Do chronic functional somatic symptoms amount to one single syndrome?
+# 194 | Does the bracket-ligature combination affect the amount of orthodontic space closure over three months?
+Over three months, does the combination of bracket and ligature change how much space closes during orthodontic treatment?

@@ -1,0 +1,87 @@
+{
+  "artifact_dir": "artifacts\\pubmedqa-bge-small-v1",
+  "dataset": {
+    "id": "qiaojin/PubMedQA",
+    "config": "pqa_labeled",
+    "split": "train",
+    "requested_revision": "9001f2853fb87cab8d220904e0de81ac6973b318"
+  },
+  "model": {
+    "id": "BAAI/bge-small-en-v1.5",
+    "requested_revision": "5c38ec7c405ec4b44b94cc5a9bb96e735b38267a"
+  },
+  "n": 200,
+  "order": "first train rows, dataset order, no shuffle",
+  "batch_size": 8,
+  "pooling": "cls",
+  "normalization": "l2",
+  "ranking": "chunk",
+  "deduplicate_pubid": false,
+  "device": {
+    "type": "cuda",
+    "name": "NVIDIA GeForce GTX 1650",
+    "parameter_device": "cuda:0",
+    "parameter_dtype": "torch.float32"
+  },
+  "encode_seconds": 0.6847772999999506,
+  "search_seconds": 0.012344900000243797,
+  "metrics": {
+    "5": {
+      "k": 5,
+      "n": 200,
+      "hits": 197,
+      "recall": 0.985,
+      "mrr": 0.9679166666666665
+    },
+    "10": {
+      "k": 10,
+      "n": 200,
+      "hits": 198,
+      "recall": 0.99,
+      "mrr": 0.9686309523809524
+    }
+  },
+  "misses_at_10": [
+    {
+      "question_index": 86,
+      "pubid": 11570976,
+      "question": "Is it Crohn's disease?",
+      "retrieved_pubids": [
+        10811329,
+        18403944,
+        12612531,
+        9347843,
+        9347843,
+        27050489,
+        18403944,
+        20197761,
+        22876568,
+        26820719
+      ]
+    },
+    {
+      "question_index": 106,
+      "pubid": 24160268,
+      "question": "\"Would a man smell a rose then throw it away?",
+      "retrieved_pubids": [
+        8916748,
+        23735520,
+        20382292,
+        18603989,
+        18603989,
+        8111516,
+        18496363,
+        20871246,
+        26606599,
+        18603989
+      ]
+    }
+  ],
+  "notebook_stdout": {
+    "recall_at_5": 0.985,
+    "mrr_at_5": 0.968,
+    "recall_at_10": 0.99,
+    "mrr_at_10": 0.969,
+    "note": "MRR 0.968 is eval_retrieval at k=5. The k=10 call printed MRR 0.969. Same first-hit definition, different cutoff."
+  }
+}

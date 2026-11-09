@@ -10,6 +10,8 @@ Not medical advice.
 from __future__ import annotations
 
 import json
+import math
+import os
 import time
 from dataclasses import dataclass
 from pathlib import Path
@@ -33,6 +35,27 @@ from rag.gemini import (
 from rag.prompts import PROMPT_ID, accepted_sources, render_prompt
 
 
+DEFAULT_MIN_SCORE = 0.68
+
+
+def _resolve_min_score(value: float | None) -> float:
+    """Use an explicit score, otherwise ``RAG_MIN_SCORE``, otherwise 0.68."""
+    if value is None:
+        raw = os.environ.get("RAG_MIN_SCORE", "").strip()
+        value = DEFAULT_MIN_SCORE if not raw else raw
+    if isinstance(value, str):
+        try:
+            value = float(value)
+        except ValueError:
+            raise ValueError("RAG_MIN_SCORE must be a finite number") from None
+    if isinstance(value, bool) or not isinstance(value, (int, float)):
+        raise ValueError("min_score must be a finite number")
+    value = float(value)
+    if not math.isfinite(value):
+        raise ValueError("min_score must be a finite number")
+    return value
+
+
 @dataclass(frozen=True)
 class RAGConfig:
     """Where the index lives and how many chunks to return."""
@@ -42,6 +65,7 @@ class RAGConfig:
     top_k: int = 10
     generation_model: str = DEFAULT_GENERATION_MODEL
     prompt_id: str = PROMPT_ID
+    min_score: float | None = None
 
     def __post_init__(self) -> None:
         artifact_dir = Path(self.artifact_dir)
@@ -57,6 +81,7 @@ class RAGConfig:
         object.__setattr__(self, "device", self.device.strip())
         object.__setattr__(self, "generation_model", self.generation_model.strip())
         object.__setattr__(self, "prompt_id", self.prompt_id.strip())
+        object.__setattr__(self, "min_score", _resolve_min_score(self.min_score))
 
 
 @dataclass(frozen=True)
@@ -168,6 +193,11 @@ class RAGEngine:
         passage numbers accepted from the response. A generator exception
         propagates; it is not turned into ``maybe`` or ``parse_fail``.
 
+        When the top retrieved score is below ``config.min_score``, the label
+        is ``out_of_scope``. That return has empty ``sources``, ``top1_score``,
+        and ``latency_seconds``. It does not build a prompt, call Gemini, or
+        acquire the rate limiter. A score equal to ``min_score`` is in scope.
+
         Raises:
             RuntimeError: ``load_resources`` has not completed.
             ValueError: ``question`` is empty or only whitespace.
@@ -176,6 +206,21 @@ class RAGEngine:
             raise ValueError("question must be a non-empty string")
         started = time.perf_counter()
         evidence = self.retrieve(question)
+        if not evidence:
+            raise RuntimeError("retrieve returned no passages")
+        top1_score = float(evidence[0].score)
+        if top1_score < self.config.min_score:
+            return {
+                "label": "out_of_scope",
+                "raw_response": "",
+                "evidence": _evidence_dicts(evidence),
+                "latency_seconds": time.perf_counter() - started,
+                "rate_limit_wait_seconds": 0.0,
+                "generation_seconds": 0.0,
+                "sources": [],
+                "prompt_id": self.config.prompt_id,
+                "top1_score": top1_score,
+            }
         context = build_context([(item.pubid, item.text) for item in evidence])
         prompt = render_prompt(question, context, self.config.prompt_id)
         client = self._client
@@ -199,16 +244,7 @@ class RAGEngine:
         return {
             "label": parse_label(raw),
             "raw_response": raw,
-            "evidence": [
-                {
-                    "rank": item.rank,
-                    "chunk_id": item.chunk_id,
-                    "pubid": item.pubid,
-                    "text": item.text,
-                    "score": item.score,
-                }
-                for item in evidence
-            ],
+            "evidence": _evidence_dicts(evidence),
             "latency_seconds": time.perf_counter() - started,
             "rate_limit_wait_seconds": rate_limit_wait_seconds,
             "generation_seconds": generation_seconds,
@@ -256,6 +292,19 @@ class RAGEngine:
         if device.index is not None and parameter.device.index != device.index:
             raise RuntimeError(f"model parameter is on {parameter.device}, expected {device}")
         return TextEmbedder(tokenizer, model, device, batch_size=QUERY_BATCH_SIZE)
+
+
+def _evidence_dicts(evidence: list[Evidence]) -> list[dict[str, object]]:
+    return [
+        {
+            "rank": item.rank,
+            "chunk_id": item.chunk_id,
+            "pubid": item.pubid,
+            "text": item.text,
+            "score": item.score,
+        }
+        for item in evidence
+    ]
 
 
 def _require_text(value, label: str) -> str:

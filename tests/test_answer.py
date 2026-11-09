@@ -193,3 +193,69 @@ def test_answer_reports_wait_generation_and_total_latency(tmp_path, fake_gemini_
     assert second["generation_seconds"] == pytest.approx(0.25)
     assert "Does aspirin reduce recurrent stroke?" in sdk.models.kwargs[1]["contents"]
     assert "lace plant" not in sdk.models.kwargs[1]["contents"]
+
+
+class VectorEmbedder:
+    def __init__(self, vector):
+        self.vector = np.asarray(vector, dtype=np.float32).reshape(1, -1)
+
+    def embed(self, texts):
+        return self.vector
+
+
+def test_score_below_min_score_skips_gemini(tmp_path):
+    client = ScriptedClient("Answer: yes\nSources: 1")
+    _write_artifact(tmp_path)
+    engine = RAGEngine(
+        RAGConfig(artifact_dir=tmp_path, device="cpu", top_k=1, min_score=0.68),
+        client=client,
+    )
+    engine.load_resources(embedder=VectorEmbedder([0.50, 0.0, 0.0]))
+
+    result = engine.answer("Is the piano in tune?")
+
+    assert result["label"] == "out_of_scope"
+    assert result["sources"] == []
+    assert result["top1_score"] == pytest.approx(0.50)
+    assert result["rate_limit_wait_seconds"] == 0.0
+    assert result["generation_seconds"] == 0.0
+    assert result["latency_seconds"] >= 0
+    assert result["prompt_id"] == "exp10"
+    assert client.prompts == []
+    assert client.models == []
+
+
+def test_score_equal_to_min_score_uses_generation(tmp_path):
+    client = ScriptedClient("Answer: yes\nSources: 1")
+    exact = float(np.float32(0.68))
+    _write_artifact(tmp_path)
+    engine = RAGEngine(
+        RAGConfig(artifact_dir=tmp_path, device="cpu", top_k=1, min_score=exact),
+        client=client,
+    )
+    engine.load_resources(embedder=VectorEmbedder([exact, 0.0, 0.0]))
+
+    result = engine.answer("Is metformin associated with lower mortality?")
+
+    assert result["label"] == "yes"
+    assert result["sources"] == [1]
+    assert "top1_score" not in result
+    assert client.models == [DEFAULT_GENERATION_MODEL]
+    assert len(client.prompts) == 1
+
+
+def test_score_above_min_score_uses_generation(tmp_path):
+    client = ScriptedClient("Answer: no\nSources: 1")
+    _write_artifact(tmp_path)
+    engine = RAGEngine(
+        RAGConfig(artifact_dir=tmp_path, device="cpu", top_k=1, min_score=0.68),
+        client=client,
+    )
+    engine.load_resources(embedder=VectorEmbedder([0.90, 0.0, 0.0]))
+
+    result = engine.answer("Is metformin associated with lower mortality?")
+
+    assert result["label"] == "no"
+    assert result["sources"] == [1]
+    assert client.prompts
+    assert "top1_score" not in result

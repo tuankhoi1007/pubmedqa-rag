@@ -1,0 +1,1485 @@
+{
+  "artifact_dir": "C:\\Users\\ngotu\\pubmedqa-rag\\artifacts\\pubmedqa-bge-small-v1",
+  "device": "cuda",
+  "method": "RAGEngine.retrieve top-1 inner product",
+  "gemini_called": false,
+  "block_rule": "top-1 score < threshold",
+  "percentile_method": "numpy.percentile linear",
+  "dataset": {
+    "id": "qiaojin/PubMedQA",
+    "config": "pqa_labeled",
+    "split": "train",
+    "requested_revision": "9001f2853fb87cab8d220904e0de81ac6973b318",
+    "start": 200,
+    "stop_exclusive": 400,
+    "order": "dataset order, no shuffle"
+  },
+  "paraphrase": {
+    "path": "C:\\Users\\ngotu\\pubmedqa-rag\\tests\\data\\paraphrased.txt",
+    "seed": 0,
+    "sample": "30 indices drawn without replacement from train 0-199, then sorted",
+    "source_indices": [
+      10,
+      18,
+      24,
+      25,
+      35,
+      37,
+      55,
+      64,
+      66,
+      72,
+      77,
+      79,
+      84,
+      91,
+      98,
+      103,
+      107,
+      120,
+      122,
+      124,
+      129,
+      130,
+      136,
+      143,
+      149,
+      154,
+      158,
+      175,
+      185,
+      194
+    ]
+  },
+  "off_topic_heldout_path": "C:\\Users\\ngotu\\pubmedqa-rag\\tests\\data\\off_topic_heldout.txt",
+  "thresholds_checked": [
+    0.66,
+    0.68,
+    0.7
+  ],
+  "groups": {
+    "in_domain_heldout": {
+      "name": "in_domain_heldout",
+      "description": "train indices 200-399, unseen while choosing the threshold",
+      "n": 200,
+      "top1": {
+        "min": 0.6826528310775757,
+        "p01": 0.7314878034591675,
+        "p05": 0.7698186993598938,
+        "median": 0.8632131516933441,
+        "max": 0.9757276177406311
+      },
+      "thresholds": [
+        {
+          "threshold": 0.66,
+          "blocked": 0,
+          "blocked_rate": 0.0
+        },
+        {
+          "threshold": 0.68,
+          "blocked": 0,
+          "blocked_rate": 0.0
+        },
+        {
+          "threshold": 0.7,
+          "blocked": 1,
+          "blocked_rate": 0.005
+        }
+      ],
+      "rows": [
+        {
+          "index": 200,
+          "question": "Does the National Institutes of Health Stroke Scale favor left hemisphere strokes?",
+          "top1_score": 0.8163496255874634
+        },
+        {
+          "index": 201,
+          "question": "Can a Novel Surgical Approach to the Temporomandibular Joint Improve Access and Reduce Complications?",
+          "top1_score": 0.8198747634887695
+        },
+        {
+          "index": 202,
+          "question": "Young-Burgess classification of pelvic ring fractures: does it predict mortality, transfusion requirements, and non-orthopaedic injuries?",
+          "top1_score": 0.9555366039276123
+        },
+        {
+          "index": 203,
+          "question": "Is vitamin D deficiency a feature of pediatric celiac disease?",
+          "top1_score": 0.8597754240036011
+        },
+        {
+          "index": 204,
+          "question": "Is unsafe sexual behaviour increasing among HIV-infected individuals?",
+          "top1_score": 0.9284474849700928
+        },
+        {
+          "index": 205,
+          "question": "Cholestasis associated with small bowel atresia: do we always need to investigate?",
+          "top1_score": 0.9238541126251221
+        },
+        {
+          "index": 206,
+          "question": "Are financial incentives cost-effective to support smoking cessation during pregnancy?",
+          "top1_score": 0.8295948505401611
+        },
+        {
+          "index": 207,
+          "question": "Can medical students contribute to quality assurance programmes in day surgery?",
+          "top1_score": 0.909017026424408
+        },
+        {
+          "index": 208,
+          "question": "Measurement of head and neck paragangliomas: is volumetric analysis worth the effort?",
+          "top1_score": 0.8743976354598999
+        },
+        {
+          "index": 209,
+          "question": "Three-dimensional ultrasound-validated large-core needle biopsy: is it a reliable method for the histological assessment of breast lesions?",
+          "top1_score": 0.9004659056663513
+        },
+        {
+          "index": 210,
+          "question": "Can bone thickness and inter-radicular space affect miniscrew placement in posterior mandibular sites?",
+          "top1_score": 0.8970680832862854
+        },
+        {
+          "index": 211,
+          "question": "Do general practice selection scores predict success at MRCGP?",
+          "top1_score": 0.8963420391082764
+        },
+        {
+          "index": 212,
+          "question": "The Deformity Angular Ratio: Does It Correlate With High-Risk Cases for Potential Spinal Cord Monitoring Alerts in Pediatric 3-Column Thoracic Spinal Deformity Corrective Surgery?",
+          "top1_score": 0.8483859896659851
+        },
+        {
+          "index": 213,
+          "question": "Does age moderate the effect of personality disorder on coping style in psychiatric inpatients?",
+          "top1_score": 0.9276430010795593
+        },
+        {
+          "index": 214,
+          "question": "Autoxidation products of both carbohydrates and lipids are increased in uremic plasma: is there oxidative stress in uremia?",
+          "top1_score": 0.842621386051178
+        },
+        {
+          "index": 215,
+          "question": "Can 'high-risk' human papillomaviruses (HPVs) be detected in human breast milk?",
+          "top1_score": 0.8925122022628784
+        },
+        {
+          "index": 216,
+          "question": "Quaternary cytoreductive surgery in ovarian cancer: does surgical effort still matter?",
+          "top1_score": 0.8696742057800293
+        },
+        {
+          "index": 217,
+          "question": "Chemotherapy and survival in advanced non-small cell lung carcinoma: is pneumologists' skepticism justified?",
+          "top1_score": 0.906974732875824
+        },
+        {
+          "index": 218,
+          "question": "Does topical ropivacaine reduce the post-tonsillectomy morbidity in pediatric patients?",
+          "top1_score": 0.8831138014793396
+        },
+        {
+          "index": 219,
+          "question": "Is pain a clinically relevant problem in general adult psychiatry?",
+          "top1_score": 0.821709156036377
+        },
+        {
+          "index": 220,
+          "question": "Does concomitant anterior/apical repair during midurethral sling improve the overactive bladder component of mixed incontinence?",
+          "top1_score": 0.8678054809570312
+        },
+        {
+          "index": 221,
+          "question": "Does the use of atypical antipsychotics as adjunctive therapy in depression result in cost savings?",
+          "top1_score": 0.8067285418510437
+        },
+        {
+          "index": 222,
+          "question": "Can patients be anticoagulated after intracerebral hemorrhage?",
+          "top1_score": 0.8278570175170898
+        },
+        {
+          "index": 223,
+          "question": "Diagnostic and therapeutic ureteroscopy: is dilatation of ureteral meatus always necessary?",
+          "top1_score": 0.8858072757720947
+        },
+        {
+          "index": 224,
+          "question": "Does managed care enable more low income persons to identify a usual source of care?",
+          "top1_score": 0.8358680009841919
+        },
+        {
+          "index": 225,
+          "question": "Knee extensor strength, dynamic stability, and functional ambulation: are they related in Parkinson's disease?",
+          "top1_score": 0.9550418257713318
+        },
+        {
+          "index": 226,
+          "question": "Is distance to provider a barrier to care for medicaid patients with breast, colorectal, or lung cancer?",
+          "top1_score": 0.860342264175415
+        },
+        {
+          "index": 227,
+          "question": "Can folic acid protect against congenital heart defects in Down syndrome?",
+          "top1_score": 0.9192756414413452
+        },
+        {
+          "index": 228,
+          "question": "Are there mental health differences between francophone and non-francophone populations in manitoba?",
+          "top1_score": 0.9281808137893677
+        },
+        {
+          "index": 229,
+          "question": "Does type 1 diabetes mellitus affect Achilles tendon response to a 10 km run?",
+          "top1_score": 0.8935635685920715
+        },
+        {
+          "index": 230,
+          "question": "Fragility of the esophageal mucosa: a pathognomonic endoscopic sign of primary eosinophilic esophagitis?",
+          "top1_score": 0.888275146484375
+        },
+        {
+          "index": 231,
+          "question": "Does cup-cage reconstruction with oversized cups provide initial stability in THA for osteoporotic acetabular fractures?",
+          "top1_score": 0.8605034947395325
+        },
+        {
+          "index": 232,
+          "question": "Pulmonary valve replacement in adults late after repair of tetralogy of fallot: are we operating too late?",
+          "top1_score": 0.8073533773422241
+        },
+        {
+          "index": 233,
+          "question": "Xanthogranulomatous cholecystitis: a premalignant condition?",
+          "top1_score": 0.8656507730484009
+        },
+        {
+          "index": 234,
+          "question": "Does TDP-43 type confer a distinct pattern of atrophy in frontotemporal lobar degeneration?",
+          "top1_score": 0.9235063791275024
+        },
+        {
+          "index": 235,
+          "question": "Is oncoplastic surgery a contraindication for accelerated partial breast radiation using the interstitial multicatheter brachytherapy method?",
+          "top1_score": 0.8516626358032227
+        },
+        {
+          "index": 236,
+          "question": "Diagnostic characteristics of child bipolar I disorder: does the \"Treatment of Early Age Mania (team)\" sample generalize?",
+          "top1_score": 0.8641892671585083
+        },
+        {
+          "index": 237,
+          "question": "Estimation of basal metabolic rate in Chinese: are the current prediction equations applicable?",
+          "top1_score": 0.872627854347229
+        },
+        {
+          "index": 238,
+          "question": "Does rugby headgear prevent concussion?",
+          "top1_score": 0.7912853956222534
+        },
+        {
+          "index": 239,
+          "question": "Spinal subdural hematoma: a sequela of a ruptured intracranial aneurysm?",
+          "top1_score": 0.8493912816047668
+        },
+        {
+          "index": 240,
+          "question": "Can shape analysis differentiate free-floating internal carotid artery thrombus from atherosclerotic plaque in patients evaluated with CTA for stroke or transient ischemic attack?",
+          "top1_score": 0.9287094473838806
+        },
+        {
+          "index": 241,
+          "question": "Dementia and aphasia in motor neuron disease: an underrecognised association?",
+          "top1_score": 0.8101502656936646
+        },
+        {
+          "index": 242,
+          "question": "Does solid culture for tuberculosis influence clinical decision making in India?",
+          "top1_score": 0.8530470132827759
+        },
+        {
+          "index": 243,
+          "question": "Diffusion-weighted echo-planar MR imaging of primary parotid gland tumors: is a prediction of different histologic subtypes possible?",
+          "top1_score": 0.9333509206771851
+        },
+        {
+          "index": 244,
+          "question": "Is there a role for endothelin-1 in the hemodynamic changes during hemodialysis?",
+          "top1_score": 0.9177494049072266
+        },
+        {
+          "index": 245,
+          "question": "Do risk factors for suicidal behavior differ by affective disorder polarity?",
+          "top1_score": 0.8983359932899475
+        },
+        {
+          "index": 246,
+          "question": "Multidisciplinary breast cancer clinics. Do they work?",
+          "top1_score": 0.7781755924224854
+        },
+        {
+          "index": 247,
+          "question": "Is the international normalised ratio (INR) reliable?",
+          "top1_score": 0.7802384495735168
+        },
+        {
+          "index": 248,
+          "question": "Are there associations of health status, disease activity and damage in SLE patients?",
+          "top1_score": 0.8551798462867737
+        },
+        {
+          "index": 249,
+          "question": "PSA repeatedly fluctuating levels are reassuring enough to avoid biopsy?",
+          "top1_score": 0.8392779231071472
+        },
+        {
+          "index": 250,
+          "question": "Is zero central line-associated bloodstream infection rate sustainable?",
+          "top1_score": 0.8374783396720886
+        },
+        {
+          "index": 251,
+          "question": "Is gastric electrical stimulation superior to standard pharmacologic therapy in improving GI symptoms, healthcare resources, and long-term health care benefits?",
+          "top1_score": 0.8128759860992432
+        },
+        {
+          "index": 252,
+          "question": "Should pulp chamber pulpotomy be seen as a permanent treatment?",
+          "top1_score": 0.7570547461509705
+        },
+        {
+          "index": 253,
+          "question": "Does transverse apex coincide with coronal apex levels (regional or global) in adolescent idiopathic scoliosis?",
+          "top1_score": 0.8713857531547546
+        },
+        {
+          "index": 254,
+          "question": "Does the Child Health Computing System adequately identify children with cerebral palsy?",
+          "top1_score": 0.9515893459320068
+        },
+        {
+          "index": 255,
+          "question": "Are we seeing the effects of public awareness campaigns?",
+          "top1_score": 0.7114890813827515
+        },
+        {
+          "index": 256,
+          "question": "Is breast cancer prognosis inherited?",
+          "top1_score": 0.7815380096435547
+        },
+        {
+          "index": 257,
+          "question": "Does nuchal translucency thickness in the first trimester predict GDM onset during pregnancy?",
+          "top1_score": 0.9404691457748413
+        },
+        {
+          "index": 258,
+          "question": "Are the arginine vasopressin V1a receptor microsatellites related to hypersexuality in children with a prepubertal and early adolescent bipolar disorder phenotype?",
+          "top1_score": 0.9118669629096985
+        },
+        {
+          "index": 259,
+          "question": "Stage I non-small cell lung carcinoma: really an early stage?",
+          "top1_score": 0.8338592052459717
+        },
+        {
+          "index": 260,
+          "question": "Does Residency Selection Criteria Predict Performance in Orthopaedic Surgery Residency?",
+          "top1_score": 0.8677060604095459
+        },
+        {
+          "index": 261,
+          "question": "Optimism and survival: does an optimistic outlook predict better survival at advanced ages?",
+          "top1_score": 0.8535906076431274
+        },
+        {
+          "index": 262,
+          "question": "Is it better to be big?",
+          "top1_score": 0.6826528310775757
+        },
+        {
+          "index": 263,
+          "question": "Is arch form influenced by sagittal molar relationship or Bolton tooth-size discrepancy?",
+          "top1_score": 0.9136837720870972
+        },
+        {
+          "index": 264,
+          "question": "Cold knife conization vs. LEEP. Are they the same procedure?",
+          "top1_score": 0.8455585241317749
+        },
+        {
+          "index": 265,
+          "question": "Are pectins involved in cold acclimation and de-acclimation of winter oil-seed rape plants?",
+          "top1_score": 0.8598642945289612
+        },
+        {
+          "index": 266,
+          "question": "Updating emotional content in working memory: a depression-specific deficit?",
+          "top1_score": 0.8125603795051575
+        },
+        {
+          "index": 267,
+          "question": "Does ultrasound imaging before puncture facilitate internal jugular vein cannulation?",
+          "top1_score": 0.9150876998901367
+        },
+        {
+          "index": 268,
+          "question": "Should prostate specific antigen be adjusted for body mass index?",
+          "top1_score": 0.8922996520996094
+        },
+        {
+          "index": 269,
+          "question": "Does obstructive sleep apnea affect aerobic fitness?",
+          "top1_score": 0.8432648777961731
+        },
+        {
+          "index": 270,
+          "question": "The effect of an intracerebroventricular injection of metformin or AICAR on the plasma concentrations of melatonin in the ewe: potential involvement of AMPK?",
+          "top1_score": 0.8799958229064941
+        },
+        {
+          "index": 271,
+          "question": "Literacy after cerebral hemispherectomy: Can the isolated right hemisphere read?",
+          "top1_score": 0.8978580236434937
+        },
+        {
+          "index": 272,
+          "question": "Characterization of the gender dimorphism after injury and hemorrhagic shock: are hormonal differences responsible?",
+          "top1_score": 0.8369805812835693
+        },
+        {
+          "index": 273,
+          "question": "Can communication with terminally ill patients be taught?",
+          "top1_score": 0.8675106763839722
+        },
+        {
+          "index": 274,
+          "question": "Delays in time to primary treatment after a diagnosis of breast cancer: does it impact survival?",
+          "top1_score": 0.8871742486953735
+        },
+        {
+          "index": 275,
+          "question": "Are increased carotid artery pulsatility and resistance indexes early signs of vascular abnormalities in young obese males?",
+          "top1_score": 0.9044733047485352
+        },
+        {
+          "index": 276,
+          "question": "Are acceptance rates of a national preventive home visit programme for older people socially imbalanced?",
+          "top1_score": 0.8499507904052734
+        },
+        {
+          "index": 277,
+          "question": "Does open access publishing increase the impact of scientific articles?",
+          "top1_score": 0.8368006944656372
+        },
+        {
+          "index": 278,
+          "question": "In vivo visualization of pyloric mucosal hypertrophy in infants with hypertrophic pyloric stenosis: is there an etiologic role?",
+          "top1_score": 0.8455387353897095
+        },
+        {
+          "index": 279,
+          "question": "Does the early adopter of drugs exist?",
+          "top1_score": 0.7552450895309448
+        },
+        {
+          "index": 280,
+          "question": "Does high blood pressure reduce the risk of chronic low back pain?",
+          "top1_score": 0.8713443875312805
+        },
+        {
+          "index": 281,
+          "question": "Does responsibility affect the public's valuation of health care interventions?",
+          "top1_score": 0.8113847374916077
+        },
+        {
+          "index": 282,
+          "question": "Nasal fractures:  is closed reduction satisfying?",
+          "top1_score": 0.8318108916282654
+        },
+        {
+          "index": 283,
+          "question": "Do improvements in outreach, clinical, and family and community-based services predict improvements in child survival?",
+          "top1_score": 0.7993811368942261
+        },
+        {
+          "index": 284,
+          "question": "Does spontaneous remission occur in polyarteritis nodosa?",
+          "top1_score": 0.8276870250701904
+        },
+        {
+          "index": 285,
+          "question": "Gluten tolerance in adult patients with celiac disease 20 years after diagnosis?",
+          "top1_score": 0.831757128238678
+        },
+        {
+          "index": 286,
+          "question": "Do symptoms predict COPD in smokers?",
+          "top1_score": 0.8208661675453186
+        },
+        {
+          "index": 287,
+          "question": "Search engine as a diagnostic tool in difficult immunological and allergologic cases: is Google useful?",
+          "top1_score": 0.9104546308517456
+        },
+        {
+          "index": 288,
+          "question": "Uniformity of evidence-based treatments in practice?",
+          "top1_score": 0.7660527229309082
+        },
+        {
+          "index": 289,
+          "question": "Do approved doctors and medical referees in the UK agree when assessing a seafarer's fitness?",
+          "top1_score": 0.8951900601387024
+        },
+        {
+          "index": 290,
+          "question": "Hepatorenal syndrome: are we missing some prognostic factors?",
+          "top1_score": 0.853833794593811
+        },
+        {
+          "index": 291,
+          "question": "Vaginal dose assessment in image-guided brachytherapy for cervical cancer: Can we really rely on dose-point evaluation?",
+          "top1_score": 0.8496817350387573
+        },
+        {
+          "index": 292,
+          "question": "Prescriptions as a proxy for asthma in children: a good choice?",
+          "top1_score": 0.8138152360916138
+        },
+        {
+          "index": 293,
+          "question": "Does the familial transmission of drinking patterns persist into young adulthood?",
+          "top1_score": 0.9316600561141968
+        },
+        {
+          "index": 294,
+          "question": "Proof of concept study: does fenofibrate have a role in sleep apnoea syndrome?",
+          "top1_score": 0.9579745531082153
+        },
+        {
+          "index": 295,
+          "question": "Can mental imagery functional magnetic resonance imaging predict recovery in patients with disorders of consciousness?",
+          "top1_score": 0.8546801209449768
+        },
+        {
+          "index": 296,
+          "question": "The nurse cystoscopist: a feasible option?",
+          "top1_score": 0.7727197408676147
+        },
+        {
+          "index": 297,
+          "question": "Is cardiovascular evaluation necessary prior to and during beta-blocker therapy for infantile hemangiomas?",
+          "top1_score": 0.8566989898681641
+        },
+        {
+          "index": 298,
+          "question": "Is specialty care associated with improved survival of patients with congestive heart failure?",
+          "top1_score": 0.8366012573242188
+        },
+        {
+          "index": 299,
+          "question": "Can the prognosis of polymyalgia rheumatica be predicted at disease onset?",
+          "top1_score": 0.7436244487762451
+        },
+        {
+          "index": 300,
+          "question": "Should ascitis volume and anthropometric measurements be estimated in hospitalized alcoholic cirrotics?",
+          "top1_score": 0.8629000186920166
+        },
+        {
+          "index": 301,
+          "question": "The use of audit to identify maternal mortality in different settings: is it just a difference between the rich and the poor?",
+          "top1_score": 0.8586667776107788
+        },
+        {
+          "index": 302,
+          "question": "Could the extent of lymphadenectomy be modified by neoadjuvant chemotherapy in cervical cancer?",
+          "top1_score": 0.853140115737915
+        },
+        {
+          "index": 303,
+          "question": "Do Wound Cultures Give Information About the Microbiology of Blood Cultures in Severe Burn Patients?",
+          "top1_score": 0.8081004619598389
+        },
+        {
+          "index": 304,
+          "question": "Are behavioural risk factors to be blamed for the conversion from optimal blood pressure to hypertensive status in Black South Africans?",
+          "top1_score": 0.831713855266571
+        },
+        {
+          "index": 305,
+          "question": "Systematic use of patient-rated depression severity monitoring: is it helpful and feasible in clinical psychiatry?",
+          "top1_score": 0.8144950866699219
+        },
+        {
+          "index": 306,
+          "question": "Treadmill training post stroke: are there any secondary benefits?",
+          "top1_score": 0.9188997745513916
+        },
+        {
+          "index": 307,
+          "question": "Does lunar position influence the time of delivery?",
+          "top1_score": 0.8384174704551697
+        },
+        {
+          "index": 308,
+          "question": "Is oral endotracheal intubation efficacy impaired in the helicopter environment?",
+          "top1_score": 0.880482017993927
+        },
+        {
+          "index": 309,
+          "question": "Prostatic syndrome and pleural effusion: are they different diseases?",
+          "top1_score": 0.7608963251113892
+        },
+        {
+          "index": 310,
+          "question": "Telemedicine and type 1 diabetes: is technology per se sufficient to improve glycaemic control?",
+          "top1_score": 0.816863477230072
+        },
+        {
+          "index": 311,
+          "question": "Is controlled ovarian stimulation in intrauterine insemination an acceptable therapy in couples with unexplained non-conception in the perspective of multiple pregnancies?",
+          "top1_score": 0.8450527787208557
+        },
+        {
+          "index": 312,
+          "question": "Is half-dose contrast-enhanced three-dimensional MR angiography sufficient for the abdominal aorta and pelvis?",
+          "top1_score": 0.9354532957077026
+        },
+        {
+          "index": 313,
+          "question": "Digital Tomosynthesis: A Viable Alternative to Noncontrast Computed Tomography for the Follow-Up of Nephrolithiasis?",
+          "top1_score": 0.909276008605957
+        },
+        {
+          "index": 314,
+          "question": "High cumulative insulin exposure: a risk factor of atherosclerosis in type 1 diabetes?",
+          "top1_score": 0.8961884379386902
+        },
+        {
+          "index": 315,
+          "question": "Are hepatitis G virus and TT virus involved in cryptogenic chronic liver disease?",
+          "top1_score": 0.9165920615196228
+        },
+        {
+          "index": 316,
+          "question": "Do older patients who refuse to participate in a self-management intervention in the Netherlands differ from older patients who agree to participate?",
+          "top1_score": 0.9221827387809753
+        },
+        {
+          "index": 317,
+          "question": "Preoperative locoregional staging of gastric cancer: is there a place for magnetic resonance imaging?",
+          "top1_score": 0.8871269822120667
+        },
+        {
+          "index": 318,
+          "question": "Do familiar teammates request and accept more backup?",
+          "top1_score": 0.7890065908432007
+        },
+        {
+          "index": 319,
+          "question": "Transsphenoidal pituitary surgery in Cushing's disease: can we predict outcome?",
+          "top1_score": 0.9068282842636108
+        },
+        {
+          "index": 320,
+          "question": "Can bedside assessment reliably exclude aspiration following acute stroke?",
+          "top1_score": 0.939627468585968
+        },
+        {
+          "index": 321,
+          "question": "Are UK radiologists satisfied with the training and support received in suspected child abuse?",
+          "top1_score": 0.7772504091262817
+        },
+        {
+          "index": 322,
+          "question": "Artefacts in 24-h pharyngeal and oesophageal pH monitoring: is simplification of pH data analysis feasible?",
+          "top1_score": 0.8318941593170166
+        },
+        {
+          "index": 323,
+          "question": "Can the condition of the cell microenvironment of mediastinal lymph nodes help predict the risk of metastases in non-small cell lung cancer?",
+          "top1_score": 0.8635262846946716
+        },
+        {
+          "index": 324,
+          "question": "Are wandering and physically nonaggressive agitation equivalent?",
+          "top1_score": 0.8322595357894897
+        },
+        {
+          "index": 325,
+          "question": "Is size-reducing ascending aortoplasty with external reinforcement an option in modern aortic surgery?",
+          "top1_score": 0.8646650314331055
+        },
+        {
+          "index": 326,
+          "question": "Does depression diagnosis and antidepressant prescribing vary by location?",
+          "top1_score": 0.8129895329475403
+        },
+        {
+          "index": 327,
+          "question": "Can routinely collected ambulance data about assaults contribute to reduction in community violence?",
+          "top1_score": 0.8269490599632263
+        },
+        {
+          "index": 328,
+          "question": "Volume change of uterine myomas during pregnancy: do myomas really grow?",
+          "top1_score": 0.9339513182640076
+        },
+        {
+          "index": 329,
+          "question": "Is laparoscopic adrenalectomy safe and effective for adrenal masses larger than 7 cm?",
+          "top1_score": 0.9194571375846863
+        },
+        {
+          "index": 330,
+          "question": "Upstream solutions: does the supplemental security income program reduce disability in the elderly?",
+          "top1_score": 0.8178678750991821
+        },
+        {
+          "index": 331,
+          "question": "Profiling quality of care: Is there a role for peer review?",
+          "top1_score": 0.7700169086456299
+        },
+        {
+          "index": 332,
+          "question": "Eyelid-parotid metastasis: do we screen for coexisting masses?",
+          "top1_score": 0.8371678590774536
+        },
+        {
+          "index": 333,
+          "question": "Will CT ordering practices change if we educate residents about the potential effects of radiation exposure?",
+          "top1_score": 0.936022162437439
+        },
+        {
+          "index": 334,
+          "question": "Does context matter for the relationship between deprivation and all-cause mortality?",
+          "top1_score": 0.8622614145278931
+        },
+        {
+          "index": 335,
+          "question": "Does stress increase imitation of drinking behavior?",
+          "top1_score": 0.8618216514587402
+        },
+        {
+          "index": 336,
+          "question": "School food policy at Dutch primary schools: room for improvement?",
+          "top1_score": 0.9291894435882568
+        },
+        {
+          "index": 337,
+          "question": "Is the atopy patch test with house dust mites specific for atopic dermatitis?",
+          "top1_score": 0.8185760974884033
+        },
+        {
+          "index": 338,
+          "question": "Juvenile osteochondritis dissecans: is it a growth disturbance of the secondary physis of the epiphysis?",
+          "top1_score": 0.899857223033905
+        },
+        {
+          "index": 339,
+          "question": "Do preoperative statins reduce atrial fibrillation after coronary artery bypass grafting?",
+          "top1_score": 0.9179186224937439
+        },
+        {
+          "index": 340,
+          "question": "Is there a uniform basal endometrial gene expression profile during the implantation window in women who became pregnant in a subsequent ICSI cycle?",
+          "top1_score": 0.8703188300132751
+        },
+        {
+          "index": 341,
+          "question": "Can decisional algorithms replace global introspection in the individual causality assessment of spontaneously reported ADRs?",
+          "top1_score": 0.7463927865028381
+        },
+        {
+          "index": 342,
+          "question": "Can we rely on arterial line sampling in performing activated plasma thromboplastin time after cardiac surgery?",
+          "top1_score": 0.8686344623565674
+        },
+        {
+          "index": 343,
+          "question": "Does timing of initial surfactant treatment make a difference in rates of chronic lung disease or mortality in premature infants?",
+          "top1_score": 0.8945070505142212
+        },
+        {
+          "index": 344,
+          "question": "Clinician assessment for acute chest syndrome in febrile patients with sickle cell disease: is it accurate enough?",
+          "top1_score": 0.8034877777099609
+        },
+        {
+          "index": 345,
+          "question": "Outcome Feedback within Emergency Medicine Training Programs: An Opportunity to Apply the Theory of Deliberate Practice?",
+          "top1_score": 0.8319807052612305
+        },
+        {
+          "index": 346,
+          "question": "Can multiple SNP testing in BRCA2 and BRCA1 female carriers be used to improve risk prediction models in conjunction with clinical assessment?",
+          "top1_score": 0.8664268255233765
+        },
+        {
+          "index": 347,
+          "question": "Does a special interest in laparoscopy affect the treatment of acute cholecystitis?",
+          "top1_score": 0.8070424795150757
+        },
+        {
+          "index": 348,
+          "question": "Can progression of valvar aortic stenosis be predicted accurately?",
+          "top1_score": 0.8506404161453247
+        },
+        {
+          "index": 349,
+          "question": "Does automatic transmission improve driving behavior in older drivers?",
+          "top1_score": 0.9436706900596619
+        },
+        {
+          "index": 350,
+          "question": "Birth characteristics and risk of low intellectual performance in early adulthood: are the associations confounded by socioeconomic factors in adolescence or familial effects?",
+          "top1_score": 0.8844462633132935
+        },
+        {
+          "index": 351,
+          "question": "Is scintigraphy a guideline method in determining amputation levels in diabetic foot?",
+          "top1_score": 0.9270164370536804
+        },
+        {
+          "index": 352,
+          "question": "Is determination between complete and incomplete traumatic spinal cord injury clinically relevant?",
+          "top1_score": 0.804760217666626
+        },
+        {
+          "index": 353,
+          "question": "Improvements in survival of gynaecological cancer in the Anglia region of England: are these an effect of centralisation of care and use of multidisciplinary management?",
+          "top1_score": 0.8568139672279358
+        },
+        {
+          "index": 354,
+          "question": "Do symptoms matter when considering patients for phase I clinical trials?",
+          "top1_score": 0.759970486164093
+        },
+        {
+          "index": 355,
+          "question": "Is vitamin D insufficiency or deficiency related to the development of osteochondritis dissecans?",
+          "top1_score": 0.8785701394081116
+        },
+        {
+          "index": 356,
+          "question": "Do episodic migraineurs selectively attend to headache-related visual stimuli?",
+          "top1_score": 0.8727342486381531
+        },
+        {
+          "index": 357,
+          "question": "Mitral replacement or repair for functional mitral regurgitation in dilated and ischemic cardiomyopathy: is it really the same?",
+          "top1_score": 0.8783890604972839
+        },
+        {
+          "index": 358,
+          "question": "Do nontriploid partial hydatidiform moles exist?",
+          "top1_score": 0.9605834484100342
+        },
+        {
+          "index": 359,
+          "question": "Is cholecystectomy really an indication for concomitant splenectomy in mild hereditary spherocytosis?",
+          "top1_score": 0.8158773183822632
+        },
+        {
+          "index": 360,
+          "question": "Does surgery or radiation therapy impact survival for patients with extrapulmonary small cell cancers?",
+          "top1_score": 0.8728922009468079
+        },
+        {
+          "index": 361,
+          "question": "MR Diagnosis of Bone Metastases at 1.5 T and 3 T: Can STIR Imaging Be Omitted?",
+          "top1_score": 0.8677390813827515
+        },
+        {
+          "index": 362,
+          "question": "Histologic evaluation of the testicular remnant associated with the vanishing testes syndrome: is surgical management necessary?",
+          "top1_score": 0.8824710845947266
+        },
+        {
+          "index": 363,
+          "question": "Does pain intensity predict a poor opioid response in cancer patients?",
+          "top1_score": 0.8593539595603943
+        },
+        {
+          "index": 364,
+          "question": "Do prerecorded lecture VODcasts affect lecture attendance of first-yearpre-clinical Graduate Entry to Medicine students?",
+          "top1_score": 0.9175682067871094
+        },
+        {
+          "index": 365,
+          "question": "Is there an intrauterine influence on obesity?",
+          "top1_score": 0.8417109847068787
+        },
+        {
+          "index": 366,
+          "question": "Assessing Patient Reported Outcomes Measures via Phone Interviews Versus Patient Self-Survey in the Clinic: Are We Measuring the Same Thing?",
+          "top1_score": 0.7826087474822998
+        },
+        {
+          "index": 367,
+          "question": "Is cytokeratin immunoreactivity useful in the diagnosis of short-segment Barrett's oesophagus in Korea?",
+          "top1_score": 0.9757276177406311
+        },
+        {
+          "index": 368,
+          "question": "Is routine dissection of the station 9 lymph nodes really necessary for primary lung cancer?",
+          "top1_score": 0.8912185430526733
+        },
+        {
+          "index": 369,
+          "question": "Cutaneous melanoma in a multiethnic population: is this a different disease?",
+          "top1_score": 0.8484692573547363
+        },
+        {
+          "index": 370,
+          "question": "Marital status, living arrangement and mortality: does the association vary by gender?",
+          "top1_score": 0.8688468933105469
+        },
+        {
+          "index": 371,
+          "question": "Does somatostatin confer insulinostatic effects of neuromedin u in the rat pancreas?",
+          "top1_score": 0.8857582211494446
+        },
+        {
+          "index": 372,
+          "question": "Kell alloimmunization in pregnancy: associated with fetal thrombocytopenia?",
+          "top1_score": 0.9122568964958191
+        },
+        {
+          "index": 373,
+          "question": "Application of computer-aided diagnosis (CAD) in MR-mammography (MRM): do we really need whole lesion time curve distribution analysis?",
+          "top1_score": 0.8680341243743896
+        },
+        {
+          "index": 374,
+          "question": "Vaccine protection in the elderly: are Austrian seniors adequately protected by vaccinations?",
+          "top1_score": 0.8716568350791931
+        },
+        {
+          "index": 375,
+          "question": "Vitamin D supplementation and regulatory T cells in apparently healthy subjects: vitamin D treatment for autoimmune diseases?",
+          "top1_score": 0.8780831098556519
+        },
+        {
+          "index": 376,
+          "question": "Gynecological cancer alarm symptoms: is contact with specialist care associated with lifestyle and socioeconomic status?",
+          "top1_score": 0.9408470392227173
+        },
+        {
+          "index": 377,
+          "question": "Does elective re-siting of intravenous cannulae decrease peripheral thrombophlebitis?",
+          "top1_score": 0.8837491273880005
+        },
+        {
+          "index": 378,
+          "question": "Can third trimester ultrasound predict the presentation of the first twin at delivery?",
+          "top1_score": 0.8491528630256653
+        },
+        {
+          "index": 379,
+          "question": "Risk factors for major depression during midlife among a community sample of women with and without prior major depression: are they the same or different?",
+          "top1_score": 0.8437089920043945
+        },
+        {
+          "index": 380,
+          "question": "Totally implantable venous access device placement by interventional radiologists: are prophylactic antibiotics necessary?",
+          "top1_score": 0.7986997365951538
+        },
+        {
+          "index": 381,
+          "question": "Starting insulin in type 2 diabetes: continue oral hypoglycemic agents?",
+          "top1_score": 0.8328684568405151
+        },
+        {
+          "index": 382,
+          "question": "Clinical identifiers for early-stage primary/idiopathic adhesive capsulitis: are we seeing the real picture?",
+          "top1_score": 0.916703462600708
+        },
+        {
+          "index": 383,
+          "question": "Does delaying surgery in immature adolescent idiopathic scoliosis patients with progressive curve, lead to addition of fusion levels?",
+          "top1_score": 0.9053756594657898
+        },
+        {
+          "index": 384,
+          "question": "Bactericidal activity of 3 cutaneous/mucosal antiseptic solutions in the presence of interfering substances: Improvement of the NF EN 13727 European Standard?",
+          "top1_score": 0.8776678442955017
+        },
+        {
+          "index": 385,
+          "question": "Empiric treatment of uncomplicated urinary tract infection with fluoroquinolones in older women in Israel: another lost treatment option?",
+          "top1_score": 0.8876644372940063
+        },
+        {
+          "index": 386,
+          "question": "Do risk calculators accurately predict surgical site occurrences?",
+          "top1_score": 0.7935906648635864
+        },
+        {
+          "index": 387,
+          "question": "Can EMS Providers Provide Appropriate Tidal Volumes in a Simulated Adult-sized Patient with a Pediatric-sized Bag-Valve-Mask?",
+          "top1_score": 0.8421697020530701
+        },
+        {
+          "index": 388,
+          "question": "Can students' scores on preclerkship clinical performance examinations predict that they will fail a senior clinical performance examination?",
+          "top1_score": 0.8954954743385315
+        },
+        {
+          "index": 389,
+          "question": "Recovery Outcome Measures: Is There a Place for Culture, Attitudes, and Faith?",
+          "top1_score": 0.8003667593002319
+        },
+        {
+          "index": 390,
+          "question": "Can surgeon familiarization with current evidence lead to a change in practice?",
+          "top1_score": 0.7316898107528687
+        },
+        {
+          "index": 391,
+          "question": "Advanced epithelial ovarian carcinoma in Thai women: should we continue to offer second-look laparotomy?",
+          "top1_score": 0.7958188056945801
+        },
+        {
+          "index": 392,
+          "question": "Is high-sensitivity C-reactive protein associated with carotid atherosclerosis in healthy Koreans?",
+          "top1_score": 0.8975479602813721
+        },
+        {
+          "index": 393,
+          "question": "Validation of the 2009 TNM version in a large multi-institutional cohort of patients treated for renal cell carcinoma: are further improvements needed?",
+          "top1_score": 0.8504894375801086
+        },
+        {
+          "index": 394,
+          "question": "Are interstitial fluid concentrations of meropenem equivalent to plasma concentrations in critically ill patients receiving continuous renal replacement therapy?",
+          "top1_score": 0.8776631355285645
+        },
+        {
+          "index": 395,
+          "question": "Does Sensation Return to the Nasal Tip After Microfat Grafting?",
+          "top1_score": 0.8691854476928711
+        },
+        {
+          "index": 396,
+          "question": "Do older men benefit from curative therapy of localized prostate cancer?",
+          "top1_score": 0.7967756986618042
+        },
+        {
+          "index": 397,
+          "question": "Pituitary apoplexy: do histological features influence the clinical presentation and outcome?",
+          "top1_score": 0.9367188215255737
+        },
+        {
+          "index": 398,
+          "question": "Do African American women require fewer calories to maintain weight?",
+          "top1_score": 0.8877261877059937
+        },
+        {
+          "index": 399,
+          "question": "Emergency double-balloon enteroscopy combined with real-time viewing of capsule endoscopy: a feasible combined approach in acute overt-obscure gastrointestinal bleeding?",
+          "top1_score": 0.8903571963310242
+        }
+      ]
+    },
+    "paraphrase": {
+      "name": "paraphrase",
+      "description": "rewrites of 30 seed-0 questions from train 0-199",
+      "n": 30,
+      "top1": {
+        "min": 0.7423524260520935,
+        "p01": 0.7437111234664917,
+        "p05": 0.7523502945899964,
+        "median": 0.8434003293514252,
+        "max": 0.9542472958564758
+      },
+      "thresholds": [
+        {
+          "threshold": 0.66,
+          "blocked": 0,
+          "blocked_rate": 0.0
+        },
+        {
+          "threshold": 0.68,
+          "blocked": 0,
+          "blocked_rate": 0.0
+        },
+        {
+          "threshold": 0.7,
+          "blocked": 0,
+          "blocked_rate": 0.0
+        }
+      ],
+      "rows": [
+        {
+          "source_index": 10,
+          "original": "Did Chile's traffic law reform push police enforcement?",
+          "question": "After Chile rewrote its road-traffic statutes, did police enforce the rules more?",
+          "top1_score": 0.7865476608276367
+        },
+        {
+          "source_index": 18,
+          "original": "Is there a model to teach and practice retroperitoneoscopic nephrectomy?",
+          "question": "Does a training model exist for learning and rehearsing kidney removal through a retroperitoneal endoscope?",
+          "top1_score": 0.8210431337356567
+        },
+        {
+          "source_index": 24,
+          "original": "Are reports of mechanical dysfunction in chronic oro-facial pain related to somatisation?",
+          "question": "In long-lasting pain of the mouth and face, are complaints of mechanical dysfunction tied to somatization?",
+          "top1_score": 0.7971481084823608
+        },
+        {
+          "source_index": 25,
+          "original": "Amblyopia: is visual loss permanent?",
+          "question": "When a person has amblyopia, does the loss of vision last for good?",
+          "top1_score": 0.786998987197876
+        },
+        {
+          "source_index": 35,
+          "original": "Do general practice characteristics influence uptake of an information technology (IT) innovation in primary care?",
+          "question": "Do the features of a general practice change how readily a primary-care clinic adopts a new information-technology tool?",
+          "top1_score": 0.8454000353813171
+        },
+        {
+          "source_index": 37,
+          "original": "Do follow-up recommendations for abnormal Papanicolaou smears influence patient adherence?",
+          "question": "If clinicians recommend follow-up after an abnormal Pap smear, does that change whether patients stick with the plan?",
+          "top1_score": 0.8457933068275452
+        },
+        {
+          "source_index": 55,
+          "original": "Is there a correlation between androgens and sexual desire in women?",
+          "question": "Among women, do androgen levels go together with the level of sexual desire?",
+          "top1_score": 0.8618740439414978
+        },
+        {
+          "source_index": 64,
+          "original": "Can we measure mesopic pupil size with the cobalt blue light slit-lamp biomicroscopy method?",
+          "question": "Is slit-lamp biomicroscopy with a cobalt-blue light a workable way to measure how large the pupil is in mesopic conditions?",
+          "top1_score": 0.8661760091781616
+        },
+        {
+          "source_index": 66,
+          "original": "Does a colonoscopy after acute diverticulitis affect its management?",
+          "question": "Once an episode of acute diverticulitis has happened, does performing a colonoscopy change how the illness is managed?",
+          "top1_score": 0.7470375895500183
+        },
+        {
+          "source_index": 72,
+          "original": "Is the combination with 2-methoxyestradiol able to reduce the dosages of chemotherapeutices in the treatment of human ovarian cancer?",
+          "question": "Can adding 2-methoxyestradiol allow lower chemotherapy doses in the treatment of ovarian cancer in humans?",
+          "top1_score": 0.8707820773124695
+        },
+        {
+          "source_index": 77,
+          "original": "Continuation of pregnancy after antenatal corticosteroid administration: opportunity for rescue?",
+          "question": "If the pregnancy continues after antenatal corticosteroids have been given, is there an opportunity for a rescue course?",
+          "top1_score": 0.8531628847122192
+        },
+        {
+          "source_index": 79,
+          "original": "Does the clinical presentation of a prior preterm birth predict risk in a subsequent pregnancy?",
+          "question": "Does the way an earlier preterm birth presented forecast the risk during the next pregnancy?",
+          "top1_score": 0.7813780307769775
+        },
+        {
+          "source_index": 84,
+          "original": "Treatment of contralateral hydrocele in neonatal testicular torsion: Is less more?",
+          "question": "For a hydrocele on the opposite side in neonatal testicular torsion, is a more limited treatment preferable?",
+          "top1_score": 0.8962401747703552
+        },
+        {
+          "source_index": 91,
+          "original": "Is Panton-Valentine leucocidin associated with the pathogenesis of Staphylococcus aureus bacteraemia in the UK?",
+          "question": "In bloodstream infections with Staphylococcus aureus in the UK, is Panton-Valentine leukocidin linked to how the illness develops?",
+          "top1_score": 0.8396456837654114
+        },
+        {
+          "source_index": 98,
+          "original": "Does the radiographic transition zone correlate with the level of aganglionosis on the specimen in Hirschsprung's disease?",
+          "question": "In Hirschsprung disease, does the transition zone on imaging match the level of aganglionosis found in the specimen?",
+          "top1_score": 0.910001814365387
+        },
+        {
+          "source_index": 103,
+          "original": "Is there a favorable subset of patients with prostate cancer who develop oligometastases?",
+          "question": "Among patients with prostate cancer who go on to develop oligometastases, is there a subgroup with a more favorable course?",
+          "top1_score": 0.7423524260520935
+        },
+        {
+          "source_index": 107,
+          "original": "Department of Transportation vs self-reported data on motor vehicle collisions and driving convictions for stroke survivors: do they agree?",
+          "question": "For stroke survivors, do official transport records of crashes and driving convictions agree with what the patients themselves report?",
+          "top1_score": 0.8675277233123779
+        },
+        {
+          "source_index": 120,
+          "original": "Do patients with rheumatoid arthritis established on methotrexate and folic acid 5 mg daily need to continue folic acid supplements long term?",
+          "question": "Once patients with rheumatoid arthritis are stable on methotrexate plus 5 mg of folic acid each day, do they still need to keep taking folic acid over the long term?",
+          "top1_score": 0.8414006233215332
+        },
+        {
+          "source_index": 122,
+          "original": "Does lung ischemia and reperfusion have an impact on coronary flow?",
+          "question": "Do a period of ischemia in the lung and the later reperfusion change flow through the coronary circulation?",
+          "top1_score": 0.816708505153656
+        },
+        {
+          "source_index": 124,
+          "original": "Transient tachypnea of the newborn (TTN): a role for polymorphisms in the beta-adrenergic receptor (ADRB) encoding genes?",
+          "question": "Might polymorphisms in the genes encoding the beta-adrenergic receptor play a role in transient tachypnea of the newborn?",
+          "top1_score": 0.7831798791885376
+        },
+        {
+          "source_index": 129,
+          "original": "Do somatic complaints predict subsequent symptoms of depression?",
+          "question": "Do complaints about bodily symptoms forecast depressive symptoms that appear later?",
+          "top1_score": 0.7856593132019043
+        },
+        {
+          "source_index": 130,
+          "original": "Are women with major depression in pregnancy identifiable in population health data?",
+          "question": "Can records from population health data pick out women who have major depression during pregnancy?",
+          "top1_score": 0.8648594617843628
+        },
+        {
+          "source_index": 136,
+          "original": "Can transcranial direct current stimulation be useful in differentiating unresponsive wakefulness syndrome from minimally conscious state patients?",
+          "question": "Is transcranial direct-current stimulation useful for separating patients with unresponsive wakefulness syndrome from those in a minimally conscious state?",
+          "top1_score": 0.8527533411979675
+        },
+        {
+          "source_index": 143,
+          "original": "Serovar specific immunity to Neisseria gonorrhoeae: does it exist?",
+          "question": "Does immunity to Neisseria gonorrhoeae that is specific to one serovar actually exist?",
+          "top1_score": 0.8575563430786133
+        },
+        {
+          "source_index": 149,
+          "original": "Can normal knee kinematics be restored with unicompartmental knee replacement?",
+          "question": "Can replacing a single compartment of the knee bring the joint's kinematics back to normal?",
+          "top1_score": 0.7588436007499695
+        },
+        {
+          "source_index": 154,
+          "original": "Would corrected QT dispersion predict left ventricular hypertrophy in hypertensive patients?",
+          "question": "In patients with hypertension, would corrected QT dispersion predict hypertrophy of the left ventricle?",
+          "top1_score": 0.9263482093811035
+        },
+        {
+          "source_index": 158,
+          "original": "Can bisphosphonate treatment be stopped in a growing child with skeletal fragility?",
+          "question": "For a child who is still growing and has a fragile skeleton, can treatment with a bisphosphonate be discontinued?",
+          "top1_score": 0.8479784727096558
+        },
+        {
+          "source_index": 175,
+          "original": "Are Biochemical Markers of Bone Turnover Representative of Bone Histomorphometry in 370 Postmenopausal Women?",
+          "question": "Among 370 postmenopausal women, are biochemical markers of bone turnover representative of what bone histomorphometry shows?",
+          "top1_score": 0.8354675769805908
+        },
+        {
+          "source_index": 185,
+          "original": "Chronic functional somatic symptoms: a single syndrome?",
+          "question": "Do chronic functional somatic symptoms amount to one single syndrome?",
+          "top1_score": 0.8243147730827332
+        },
+        {
+          "source_index": 194,
+          "original": "Does the bracket-ligature combination affect the amount of orthodontic space closure over three months?",
+          "question": "Over three months, does the combination of bracket and ligature change how much space closes during orthodontic treatment?",
+          "top1_score": 0.9542472958564758
+        }
+      ]
+    },
+    "off_topic_heldout": {
+      "name": "off_topic_heldout",
+      "description": "30 new off-topic questions, disjoint from the 50 tuning questions",
+      "n": 30,
+      "top1": {
+        "min": 0.527042031288147,
+        "p01": 0.5279767709970474,
+        "p05": 0.5365052431821823,
+        "median": 0.5843360126018524,
+        "max": 0.6477010250091553
+      },
+      "thresholds": [
+        {
+          "threshold": 0.66,
+          "blocked": 30,
+          "blocked_rate": 1.0
+        },
+        {
+          "threshold": 0.68,
+          "blocked": 30,
+          "blocked_rate": 1.0
+        },
+        {
+          "threshold": 0.7,
+          "blocked": 30,
+          "blocked_rate": 1.0
+        }
+      ],
+      "rows": [
+        {
+          "index": 0,
+          "question": "Is the piano in tune?",
+          "top1_score": 0.5818756222724915
+        },
+        {
+          "index": 1,
+          "question": "Did the orchestra play an encore?",
+          "top1_score": 0.5768676400184631
+        },
+        {
+          "index": 2,
+          "question": "Is this song written in a major key?",
+          "top1_score": 0.5970346331596375
+        },
+        {
+          "index": 3,
+          "question": "Did the film sequel earn more than the original?",
+          "top1_score": 0.589269757270813
+        },
+        {
+          "index": 4,
+          "question": "Was the director's cut longer than the theatrical release?",
+          "top1_score": 0.5597665905952454
+        },
+        {
+          "index": 5,
+          "question": "Is the museum closed on Mondays?",
+          "top1_score": 0.5937595367431641
+        },
+        {
+          "index": 6,
+          "question": "Does this city have a subway?",
+          "top1_score": 0.6229092478752136
+        },
+        {
+          "index": 7,
+          "question": "Is the mountain trail open during winter?",
+          "top1_score": 0.5526021718978882
+        },
+        {
+          "index": 8,
+          "question": "Can I return this shirt without a receipt?",
+          "top1_score": 0.5453650951385498
+        },
+        {
+          "index": 9,
+          "question": "Is the bookstore holding a sale this weekend?",
+          "top1_score": 0.527042031288147
+        },
+        {
+          "index": 10,
+          "question": "Does the cat need a taller scratching post?",
+          "top1_score": 0.5622923374176025
+        },
+        {
+          "index": 11,
+          "question": "Should the dog be walked before breakfast?",
+          "top1_score": 0.5786930322647095
+        },
+        {
+          "index": 12,
+          "question": "Is Spanish harder to learn than Italian?",
+          "top1_score": 0.6332882642745972
+        },
+        {
+          "index": 13,
+          "question": "Does this sentence use the past tense?",
+          "top1_score": 0.6345726251602173
+        },
+        {
+          "index": 14,
+          "question": "Is next Friday a public holiday?",
+          "top1_score": 0.5812878012657166
+        },
+        {
+          "index": 15,
+          "question": "Did I leave the house keys on the kitchen table?",
+          "top1_score": 0.5786750316619873
+        },
+        {
+          "index": 16,
+          "question": "Should the bookshelf be anchored to the wall?",
+          "top1_score": 0.5985038876533508
+        },
+        {
+          "index": 17,
+          "question": "Is 17 a prime number?",
+          "top1_score": 0.619523286819458
+        },
+        {
+          "index": 18,
+          "question": "Does this triangle contain a right angle?",
+          "top1_score": 0.6477010250091553
+        },
+        {
+          "index": 19,
+          "question": "Is the city bus late more often in the evening?",
+          "top1_score": 0.6126841306686401
+        },
+        {
+          "index": 20,
+          "question": "Did the harbor ferry leave the dock on time?",
+          "top1_score": 0.5867964029312134
+        },
+        {
+          "index": 21,
+          "question": "Is the camera battery fully charged?",
+          "top1_score": 0.544131875038147
+        },
+        {
+          "index": 22,
+          "question": "Should this photo be framed in portrait orientation?",
+          "top1_score": 0.594406247138977
+        },
+        {
+          "index": 23,
+          "question": "Do garden tomatoes need full sun?",
+          "top1_score": 0.564925491809845
+        },
+        {
+          "index": 24,
+          "question": "Is it time to water the houseplants?",
+          "top1_score": 0.603593111038208
+        },
+        {
+          "index": 25,
+          "question": "Was the board-game night cancelled?",
+          "top1_score": 0.5302652716636658
+        },
+        {
+          "index": 26,
+          "question": "Is the library card still valid?",
+          "top1_score": 0.5889211297035217
+        },
+        {
+          "index": 27,
+          "question": "Can a passport be renewed online?",
+          "top1_score": 0.5746378302574158
+        },
+        {
+          "index": 28,
+          "question": "Is the apartment lease up for renewal?",
+          "top1_score": 0.5750581622123718
+        },
+        {
+          "index": 29,
+          "question": "Did the parcel arrive before noon?",
+          "top1_score": 0.6374397873878479
+        }
+      ]
+    }
+  }
+}
