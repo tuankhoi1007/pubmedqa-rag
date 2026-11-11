@@ -16,8 +16,15 @@ The process shares one limiter for this quota: at most 15 starts in any 60
 seconds, and at least 4.1 seconds between starts. Fourteen gaps of 4.1 seconds
 place the fifteenth start 57.4 seconds after the first, inside the window.
 This only paces one process. It does not see another notebook or app on the
-same key, does not enforce token or daily quotas, and does not prevent every
-HTTP 429. The model and API key are never swapped to avoid a limit.
+same key, does not enforce token quotas, and does not prevent every HTTP 429.
+The model and API key are never swapped to avoid a limit.
+
+``RAG_DAILY_LIMIT`` is a separate gate in front of this limiter. It counts
+Gemini calls in this process and, when the count reaches the limit, rejects
+the call until 00:00 UTC without taking a limiter slot. A blank or missing
+value leaves the gate open. ``out_of_scope`` never reaches Gemini, so it does
+not count. The gate resets when the UTC date changes and when the process
+restarts.
 
 Proposed limit if a retry is added later, still not the notebook loop:
 - at most 2 attempts
@@ -30,6 +37,7 @@ Proposed limit if a retry is added later, still not the notebook loop:
 
 from __future__ import annotations
 
+import math
 import os
 import re
 import threading
@@ -37,6 +45,7 @@ import time
 from collections import deque
 from collections.abc import Callable, Mapping
 from dataclasses import dataclass
+from datetime import datetime, time as datetime_time, timedelta, timezone
 from typing import Literal
 
 SERVING_TIMEOUT_MS = 30_000
@@ -120,7 +129,7 @@ def request_kind(exc: BaseException) -> ErrorKind:
 @dataclass(frozen=True)
 class GenerationResult:
     """One Gemini attempt after it has left the rate limiter."""
-
+ 
     text: str
     rate_limit_wait_seconds: float
     generation_seconds: float
@@ -208,6 +217,111 @@ def shared_gemini_limiter() -> GeminiRateLimiter:
     return _SHARED_LIMITER
 
 
+class DailyLimitError(Exception):
+    """The process daily cap rejected this Gemini call.
+
+    ``retry_after_seconds`` is the whole seconds until 00:00 UTC. This is not
+    a Gemini HTTP 429 and it does not consume a rate-limiter slot.
+    """
+
+    def __init__(self, retry_after_seconds: int) -> None:
+        if (
+            isinstance(retry_after_seconds, bool)
+            or not isinstance(retry_after_seconds, int)
+            or retry_after_seconds < 1
+        ):
+            raise ValueError("retry_after_seconds must be a positive integer")
+        self.retry_after_seconds = retry_after_seconds
+        super().__init__("daily limit reached")
+
+
+class DailyLimitConfigError(RuntimeError):
+    """``RAG_DAILY_LIMIT`` is set but is not a positive integer."""
+
+
+def _as_utc(now: datetime) -> datetime:
+    if now.tzinfo is None or now.tzinfo.utcoffset(now) is None:
+        return now.replace(tzinfo=timezone.utc)
+    return now.astimezone(timezone.utc)
+
+
+def seconds_until_utc_midnight(now: datetime) -> int:
+    """Whole seconds from ``now`` until the next 00:00 UTC. At least 1."""
+    current = _as_utc(now)
+    next_midnight = datetime.combine(
+        current.date() + timedelta(days=1),
+        datetime_time.min,
+        tzinfo=timezone.utc,
+    )
+    remaining = (next_midnight - current).total_seconds()
+    return max(1, math.ceil(remaining))
+
+
+def configured_daily_limit(env: Mapping[str, str] | None = None) -> int | None:
+    """Return the process cap, or ``None`` when the gate is off.
+
+    Missing and blank values are off. Any other value must be a positive
+    integer. The raw value is never included in the error.
+    """
+    source = os.environ if env is None else env
+    raw = source.get("RAG_DAILY_LIMIT")
+    if raw is None:
+        return None
+    if not isinstance(raw, str):
+        raise DailyLimitConfigError("RAG_DAILY_LIMIT must be a positive integer")
+    text = raw.strip()
+    if not text:
+        return None
+    if not text.isdigit() or int(text) < 1:
+        raise DailyLimitConfigError("RAG_DAILY_LIMIT must be a positive integer")
+    return int(text)
+
+
+class DailyCallLimit:
+    """Count Gemini calls for the UTC day. One instance per process."""
+
+    def __init__(self) -> None:
+        self._lock = threading.Lock()
+        self._count = 0
+        self._day = None
+        self._now: Callable[[], datetime] = lambda: datetime.now(timezone.utc)
+
+    def bind_clock(self, now: Callable[[], datetime]) -> None:
+        with self._lock:
+            self._now = now
+
+    def reset(self) -> None:
+        with self._lock:
+            self._count = 0
+            self._day = None
+
+    def reserve(self, limit: int | None) -> None:
+        """Take one call, or raise :class:`DailyLimitError` before any slot.
+
+        ``limit is None`` leaves the counter unchanged. The check and the
+        increment share one lock. Callers must not hold the rate-limiter lock.
+        """
+        if limit is None:
+            return
+        with self._lock:
+            now = _as_utc(self._now())
+            day = now.date()
+            if self._day != day:
+                self._day = day
+                self._count = 0
+            if self._count >= limit:
+                raise DailyLimitError(seconds_until_utc_midnight(now))
+            self._count += 1
+
+
+_SHARED_DAILY = DailyCallLimit()
+
+
+def shared_daily_limit() -> DailyCallLimit:
+    """The one daily gate for this process."""
+    return _SHARED_DAILY
+
+
 def require_api_key(env: Mapping[str, str]) -> str:
     """Read ``GEMINI_API_KEY`` from the supplied mapping. Do not log the value."""
     value = env.get("GEMINI_API_KEY", "")
@@ -236,6 +350,7 @@ class GeminiClient:
     def generate(self, prompt: str, model: str) -> GenerationResult:
         """One request. No retry and no generation config.
 
+        The daily gate runs first. A rejection does not take a limiter slot.
         The shared limiter is acquired immediately before this attempt. A
         later retry loop must acquire again inside each attempt. The SDK
         timeout is unchanged and the scheduling lock is not held while the
@@ -243,6 +358,7 @@ class GeminiClient:
         """
         if not isinstance(model, str) or not model.strip():
             raise ValueError("model must be a non-empty string")
+        shared_daily_limit().reserve(configured_daily_limit())
         limiter = shared_gemini_limiter()
         rate_limit_wait_seconds = limiter.acquire()
         started = limiter.clock()

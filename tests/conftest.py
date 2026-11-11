@@ -1,9 +1,10 @@
 import threading
 import time
+from datetime import datetime, timezone
 
 import pytest
 
-from rag.gemini import shared_gemini_limiter
+from rag.gemini import shared_daily_limit, shared_gemini_limiter
 
 
 class FakeClock:
@@ -38,4 +39,19 @@ def fake_gemini_clock():
     limiter.reset()
     yield clock
     limiter.bind_clock(time.monotonic, time.sleep)
+    limiter.reset()
+
+
+def _utc_now() -> datetime:
+    return datetime.now(timezone.utc)
+
+
+@pytest.fixture(autouse=True)
+def reset_daily_limit(monkeypatch):
+    monkeypatch.delenv("RAG_DAILY_LIMIT", raising=False)
+    limiter = shared_daily_limit()
+    limiter.bind_clock(_utc_now)
+    limiter.reset()
+    yield
+    limiter.bind_clock(_utc_now)
     limiter.reset()

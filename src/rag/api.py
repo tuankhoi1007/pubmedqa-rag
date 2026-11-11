@@ -11,6 +11,12 @@ Run one worker from the repository root::
 keep its own 15 requests per 60 seconds and the two together would pass the
 quota. The command binds ``127.0.0.1`` and does not auto-reload.
 
+``RAG_DEVICE`` selects the embedding device. When it is unset or blank, the
+engine stays on ``cuda`` for the local GPU. ``RAG_DAILY_LIMIT``, when set to a
+positive integer, caps Gemini calls in this process until 00:00 UTC. That gate
+sits in front of the 15-request limiter and does not take one of its slots.
+An ``out_of_scope`` answer does not use it. Unset or blank disables the cap.
+
 ``GET /health`` does not call Gemini and does not report quota. ``POST /ask``
 is a sync endpoint so FastAPI runs ``answer()`` in its threadpool. At most
 ``RAG_MAX_PENDING`` calls (default 4) may be waiting or running; the next one
@@ -38,7 +44,12 @@ from starlette.routing import Mount
 from pydantic import BaseModel, ConfigDict, ValidationError, field_validator
 
 from rag.engine import RAGConfig, RAGEngine
-from rag.gemini import GeminiRequestError, gemini_client_from_environment
+from rag.gemini import (
+    DailyLimitError,
+    GeminiRequestError,
+    configured_daily_limit,
+    gemini_client_from_environment,
+)
 
 DEFAULT_ARTIFACT_DIR = Path("artifacts/pubmedqa-bge-small-v1")
 DEFAULT_DEVICE = "cuda"
@@ -47,6 +58,10 @@ MAX_QUESTION_CHARS = 1000
 DEFAULT_MAX_PENDING = 4
 SOURCE_TEXT_LIMIT = 300
 RETRY_AFTER_SECONDS = "5"
+DAILY_LIMIT_DETAIL = (
+    "The daily question limit has been reached. "
+    "Please try again after 00:00 UTC (07:00 Vietnam time)."
+)
 logger = logging.getLogger("rag.api")
 _dotenv_loaded = False
 
@@ -255,7 +270,10 @@ def create_app(
     limit = _pending_limit(max_pending)
     if engine is None:
         if config is None:
-            config = RAGConfig(artifact_dir=DEFAULT_ARTIFACT_DIR, device=DEFAULT_DEVICE)
+            config = RAGConfig(
+                artifact_dir=DEFAULT_ARTIFACT_DIR,
+                device=_device_from_environment(),
+            )
         if not isinstance(config, RAGConfig):
             raise TypeError("config must be a RAGConfig")
         engine = RAGEngine(config, client=_EnvironmentGemini())
@@ -342,6 +360,9 @@ def create_app(
 
 @asynccontextmanager
 async def _lifespan(app: FastAPI):
+    # A bad cap must stop startup. Swallowing it would leave /health at
+    # not_ready with no explanation.
+    configured_daily_limit()
     engine = app.state.engine
     try:
         try:
@@ -355,6 +376,15 @@ async def _lifespan(app: FastAPI):
     finally:
         app.state.ready = False
         await _invoke_close(getattr(engine, "_client", None))
+
+
+def _device_from_environment() -> str:
+    """Use ``RAG_DEVICE`` when it has text. A blank value keeps CUDA."""
+    raw = os.environ.get("RAG_DEVICE", "")
+    if not isinstance(raw, str):
+        return DEFAULT_DEVICE
+    device = raw.strip()
+    return device or DEFAULT_DEVICE
 
 
 def _pending_limit(explicit: int | None) -> int:
@@ -535,6 +565,14 @@ def ask_service(app_state: object, question: str, debug: bool) -> AskResponse:
         except ValueError:
             _log_error(422, "invalid_question", started)
             raise AskServiceError(422, "invalid_question", "question is invalid")
+        except DailyLimitError as exc:
+            _log_error(429, "daily_limit", started)
+            raise AskServiceError(
+                429,
+                "daily_limit",
+                DAILY_LIMIT_DETAIL,
+                retry_after=str(exc.retry_after_seconds),
+            )
         except GeminiRequestError as exc:
             status, code, detail = _gemini_status(getattr(exc, "kind", "other"))
             _log_error(status, code, started)

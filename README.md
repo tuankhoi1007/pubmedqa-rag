@@ -1,3 +1,11 @@
+---
+title: PubMedQA RAG
+emoji: "🧬"
+sdk: docker
+app_port: 7860
+short_description: Biomedical yes/no research demo. Not medical advice.
+---
+
 # pubmedqa-rag
 
 Research demo: RAG over [PubMedQA](https://pubmedqa.github.io/) (Jin et al., 2019). **Not medical advice.**

@@ -6,9 +6,9 @@ import threading
 import pytest
 from fastapi.testclient import TestClient
 
-from rag.api import LOOPBACK_HOST, create_app, main
+from rag.api import DAILY_LIMIT_DETAIL, LOOPBACK_HOST, create_app, main
 from rag.engine import RAGConfig, RAGEngine
-from rag.gemini import GeminiRequestError
+from rag.gemini import DailyLimitConfigError, DailyLimitError, GeminiRequestError
 
 pytestmark = pytest.mark.filterwarnings(
     "ignore:Using `httpx` with `starlette.testclient`:starlette.exceptions.StarletteDeprecationWarning"
@@ -281,6 +281,7 @@ def test_gemini_kind_maps_to_http_status(error, status, code):
         response = client.post("/ask", json={"question": QUESTION})
     assert response.status_code == status
     assert response.json()["error"] == code
+    assert response.headers.get("retry-after") is None
     assert SECRET not in response.text
     assert "Traceback" not in response.text
     assert "maybe" not in response.text
@@ -373,8 +374,42 @@ def test_dotenv_loads_once_and_does_not_override_the_environment(monkeypatch):
     assert calls == [((), {"override": False})]
 
 
+def test_daily_limit_returns_429_with_retry_after():
+    engine = FakeEngine(answer_error=DailyLimitError(43_200))
+    with TestClient(_app(engine)) as client:
+        response = client.post("/ask", json={"question": QUESTION})
+    assert response.status_code == 429
+    assert response.json() == {"error": "daily_limit", "detail": DAILY_LIMIT_DETAIL}
+    assert response.headers["retry-after"] == "43200"
+    assert "rate_limit" not in response.text
+    assert SECRET not in response.text
+
+
+def test_invalid_daily_limit_refuses_to_start(monkeypatch):
+    monkeypatch.setenv("RAG_DAILY_LIMIT", "nope")
+    with pytest.raises(DailyLimitConfigError, match="^RAG_DAILY_LIMIT must be a positive integer$"):
+        with TestClient(_app(FakeEngine())):
+            pass
+
+
+def test_rag_device_cpu_is_used_without_loading_the_model(monkeypatch):
+    monkeypatch.delenv("GEMINI_API_KEY", raising=False)
+    monkeypatch.setenv("RAG_DEVICE", "cpu")
+    app = create_app()
+    assert app.state.engine.config.device == "cpu"
+    assert app.state.engine.loaded is False
+
+
+def test_blank_rag_device_keeps_cuda(monkeypatch):
+    monkeypatch.delenv("GEMINI_API_KEY", raising=False)
+    monkeypatch.setenv("RAG_DEVICE", "   ")
+    app = create_app()
+    assert app.state.engine.config.device == "cuda"
+
+
 def test_factory_does_not_load_or_read_the_api_key(monkeypatch):
     monkeypatch.delenv("GEMINI_API_KEY", raising=False)
+    monkeypatch.delenv("RAG_DEVICE", raising=False)
     calls = {"count": 0}
 
     def forbid():
