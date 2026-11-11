@@ -1,0 +1,90 @@
+{
+  "n": 500,
+  "correct": 355,
+  "accuracy": 0.71,
+  "accuracy_ci95": {
+    "method": "wilson",
+    "level": 0.95,
+    "low": 0.6687451968835136,
+    "high": 0.7480525801226343
+  },
+  "coverage": 1.0,
+  "accuracy_on_answered": 0.71,
+  "macro_f1": 0.5487237979819583,
+  "per_label": {
+    "yes": {
+      "precision": 0.8518518518518519,
+      "recall": 0.8070175438596491,
+      "f1": 0.8288288288288288,
+      "support": 285
+    },
+    "no": {
+      "precision": 0.7345679012345679,
+      "recall": 0.68,
+      "f1": 0.7062314540059347,
+      "support": 175
+    },
+    "maybe": {
+      "precision": 0.08823529411764706,
+      "recall": 0.15,
+      "f1": 0.11111111111111112,
+      "support": 40
+    }
+  },
+  "confusion_matrix": {
+    "row_labels": [
+      "yes",
+      "no",
+      "maybe"
+    ],
+    "column_labels": [
+      "yes",
+      "no",
+      "maybe",
+      "parse_fail",
+      "out_of_scope"
+    ],
+    "matrix": [
+      [
+        230,
+        27,
+        28,
+        0,
+        0
+      ],
+      [
+        22,
+        119,
+        34,
+        0,
+        0
+      ],
+      [
+        18,
+        16,
+        6,
+        0,
+        0
+      ]
+    ]
+  },
+  "parse_fail": 0,
+  "out_of_scope": 0,
+  "config": {
+    "model": "gemini-3.5-flash-lite",
+    "prompt_id": "exp10",
+    "top_k": 10,
+    "min_score": 0.68,
+    "artifact_manifest_hash": "a065df66c45a3e2152fa54b6afd68115c6ac4db20794c701c5307d88a5a99342",
+    "artifact_manifest_hash_algorithm": "sha256"
+  },
+  "scoring": {
+    "accuracy": "pred == gold over every stored question; out_of_scope and parse_fail remain in n",
+    "coverage": "(n - out_of_scope - parse_fail) / n",
+    "accuracy_on_answered": "pred == gold among predictions that are yes, no, or maybe",
+    "macro_f1": "unweighted mean of F1 for yes, no, and maybe; a non-answer is a false negative for its gold label",
+    "confusion_matrix": "rows are gold yes/no/maybe; columns are those labels plus parse_fail and out_of_scope",
+    "interval": "Wilson score interval at 95%",
+    "rows": "every line in per_question.jsonl"
+  }
+}
