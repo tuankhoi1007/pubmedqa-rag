@@ -31,6 +31,10 @@ _SERVICE_MESSAGES = {
     "queue_full": "The server is busy. Please try again in a few seconds.",
     "invalid_question": "That question cannot be answered. Please rephrase it as a yes/no question.",
     "rate_limit": "The service is receiving too many requests. Please wait a moment and try again.",
+    "daily_limit": (
+        "The daily question limit has been reached. "
+        "Please try again after 00:00 UTC (07:00 Vietnam time)."
+    ),
     "timeout": "The model took too long to respond. Please try again.",
     "upstream": "The answering service failed. Please try again.",
     "internal": "Something went wrong while answering. Please try again.",

@@ -6,7 +6,7 @@ import pytest
 from fastapi.testclient import TestClient
 
 from rag.api import create_app
-from rag.gemini import GeminiRequestError
+from rag.gemini import DailyLimitError, GeminiRequestError
 from rag.ui import OUT_OF_SCOPE_MESSAGE, VALIDATION_MESSAGE, answer_question, build_ui
 
 pytestmark = pytest.mark.filterwarnings(
@@ -116,6 +116,7 @@ def test_parse_fail_is_shown_as_a_label():
     [
         (ValueError(SECRET), "cannot be answered"),
         (GeminiRequestError("Gemini request failed", kind="rate_limit"), "too many requests"),
+        (DailyLimitError(3600), "daily question limit"),
         (GeminiRequestError("Gemini request failed", kind="timeout"), "too long"),
         (GeminiRequestError("Gemini request failed", kind="other"), "answering service failed"),
         (RuntimeError(SECRET), "Something went wrong"),
